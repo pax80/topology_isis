@@ -1,8 +1,8 @@
 from lxml import objectify, etree
 from py2neo import Graph, Relationship, Node
 
-filename = "/home/vagrant/topo_test_topology/ISIS_DB"
-neo = "http://neo4j:oBs3rv3r@127.0.0.1:7474/db/data/"
+filename = "/home/vagrant/topology/ISIS_DB"
+neo = "http://neo4j:t0p0logy@127.0.0.1:7474/db/data/"
 graph = Graph(neo)
 
 
