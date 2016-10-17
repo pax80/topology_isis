@@ -10,12 +10,21 @@ echo 'deb http://debian.neo4j.org/repo stable/' > /etc/apt/sources.list.d/neo4j.
 echo "====== Setting up additional deian sources ====="
 echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie_backports.list
 
+apt-get update -y
 apt-get install -y python2.7-dev
+apt-get install -y libmysqlclient-dev
 apt-get install -y virtualenvwrapper
 apt-get install -y libxml2-dev libxslt1-dev
 apt-get install -y redis-server
-apt-get install -y curl
+apt-get install -y git
+
+
+echo "====== installing java and neo4j ====="
+wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
+echo 'deb http://debian.neo4j.org/repo stable/' >/tmp/neo4j.list
+mv /tmp/neo4j.list /etc/apt/sources.list.d
 apt-get install -y neo4j
+apt-get install -y curl
 
 
 echo "====== Creating user observer ====="
@@ -24,6 +33,7 @@ useradd topology -d $TOPOLOGY_HOME -g topology --create-home --shell=/bin/bash
 # set password to observer
 echo "topology:topology" | chpasswd
 usermod topology -G sudo -a  # add to sudo group
+usermod -a -G topology vagrant  # add to sudo group
 
 
 
@@ -33,7 +43,7 @@ grep -q 'export PYTHONPATH' $TOPOLOGY_HOME/.bashrc || echo 'export PYTHONPATH' >
 cd $TOPOLOGY_HOME
 su topology -c "virtualenv $PY_ENV_NAME"
 PIP_PATH="$TOPOLOGY_HOME/$PY_ENV_NAME/bin/pip"
-su topology -c "$PIP_PATH install -r /vagrant/requirements.txt"
+su topology -c "$PIP_PATH install -r /vagrant/vagrant/requirements.txt"
 su topology -c "$PIP_PATH install nose"  # required for tests running
 
 echo "====== Create topology file structure ====="
