@@ -11,7 +11,7 @@ ipaddr==2.1.11
 ipdb==0.8.1
 ipython==3.1.0
 jsonschema==2.5.1
-lxml==3.4.4
+lxml==4.6.3
 mock==1.0.1
 pexpect==3.3
 pudb==2015.4.1
