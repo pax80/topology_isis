@@ -1,7 +1,7 @@
 Jinja2==2.7.3
 MarkupSafe==0.23
 MySQL-python==1.2.5
-Pygments==2.1
+Pygments==2.7.4
 SQLAlchemy==1.0.5
 argparse==1.2.1
 elasticsearch==1.6.0
